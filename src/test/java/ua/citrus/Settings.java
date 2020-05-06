@@ -1,17 +1,24 @@
 package ua.citrus;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public abstract class Settings {
 
-    protected WebDriver driver;
+    public static WebDriver driver;
+//    public static WebDriver getDriver() {
+//        return driver;
+//    }
 
     @BeforeClass
     public void setUP() {
@@ -34,9 +41,20 @@ public abstract class Settings {
         driver.get("https://www.citrus.ua/");
     }
 
-//    @AfterClass
-//    public void quitDriver() {
-//        driver.quit();
+//    @AfterMethod
+//    public void goBack() {
+//        driver.navigate().back();
+//
+//    }
+
+    @AfterClass
+    public void quitDriver() {
+        driver.quit();
+    }
+
+//    @DataProvider(name = "data")
+//    public Object[][] dataProviderMethod() {
+//        return new Object[][]{{"Xiaomi"}, {"Samsung"}};
 //    }
 
 
