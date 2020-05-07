@@ -3,7 +3,10 @@ package ua.citrus;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -28,7 +31,7 @@ public class MainTest extends Settings {
 
         WebElement buttonNext = driver.findElement(By.xpath("//button[@class='custom-button custom-button custom-button--primary identity__submit']"));
 
-        assertTrue(buttonNext.isEnabled() , "Button Далее is not enabled");
+        assertTrue(buttonNext.isEnabled(), "Button Далее is not enabled");
 
         buttonNext.click();
 
@@ -38,7 +41,85 @@ public class MainTest extends Settings {
         WebElement passButton = driver.findElement(By.xpath("//button[@class='custom-button custom-button--primary email-login__submit']"));
         passButton.click();
         Thread.sleep(10000);
-        // нужен асерт который будет проверять залогинился ли я
+
+        String helloMe = driver.findElement(By.xpath("//div[@class='name']")).getText();
+        assertTrue(helloMe.contains("alex test"), "Alex you are not logged to the Citrus");
+
+        Thread.sleep(3000);
+        if (driver.findElement(By.xpath("//button[@class='el-dialog__headerbtn bf-video-btn']")).isDisplayed())
+            driver.findElement(By.xpath("//button[@class='el-dialog__headerbtn bf-video-btn']")).click();
+
+
+        Thread.sleep(3000);
+        WebElement linkPhones = driver.findElement(By.xpath("//li/a[@title='Смартфоны']"));
+        Thread.sleep(3000);
+
+        Actions phoneType = new Actions(driver);
+        phoneType.moveToElement(linkPhones).build().perform();
+
+// Может можно как то написать адекватный Xpath
+// li[@class='menu-aim__item menu-aim__item--active']//div[@class='wrap']//div[1]//ul[1]//li[5]//a[1]//span[1]
+
+        WebElement xiaomiPhones = driver.findElement(By.xpath(
+                "//li[@class='menu-aim__item menu-aim__item--active']//div[@class='wrap']//div[1]//ul[1]//li[5]//a[1]//span[1]"));
+        xiaomiPhones.click();
+        WebElement xiaomiPhonesPage = driver.findElement(By.xpath("//h1[contains(text(),'Xiaomi')]"));
+
+        assertEquals(xiaomiPhonesPage.getText(), "Смартфоны Xiaomi", "You are in different page");
+
+        WebElement descPrice = driver.findElement(By.xpath("//div[@class='catalog__tool-bar']//li[3]"));
+        descPrice.click();
+        Thread.sleep(3000);
+        WebElement clickBasket1 = driver.findElement(By.xpath("//button[@class='product-card__to-basket'][1]"));
+        clickBasket1.click();
+        Thread.sleep(3000);
+
+        WebElement closeBasket = driver.findElement(By.xpath("//i[@class='el-dialog__close el-icon el-icon-close']"));
+        closeBasket.click();
+
+//        WebElement clickBasket2 = driver.findElement(By.xpath("//button[@class='product-card__to-basket'][2]"));
+//        clickBasket2.click();
+
+
+ //       closeBasket.click();
+
+
+
+
+
+     // List<WebElement> phones = driver.findElements(By.xpath("//div[@class='product-card__prices']"));
+//        List<WebElement> phones = driver.findElements(By.xpath("//*[@class='product-card__to-basket']"));
+//        System.out.println(phones.size());
+//
+//        for (int i = 0; i < phones.size(); i++) {
+//            System.out.println(i + "  " + phones.get(i).getText());
+//        }
+
+
+//        List<WebElement> phonesPreOrder = driver.findElements(By.xpath("//button[@class='product-card__to-pre-order']"));
+
+        //div[@class='product-card__overview'][@class!='product-card__to-pre-order']
+        //*[@class='product-card__to-basket']
+
+//        for (int i = 0; i < phones.size(); i++) {
+//            System.out.println(i + "  " + phones.get(i).getText());
+//        }
+
+
+//        for (int i=0; i<phones.size()-1; i++)
+//        {
+//            System.out.println("Елемент" + "[" + i + "] = "+ "[" + phones.get(i).getText()+ "]");
+//
+//        }
+
+//        System.out.println(phones.size());
+
+
+
+
+        Thread.sleep(3000);
+
+
 
 
 //        WebElement searchField = driver.findElement(By.xpath("//input[@id='search-input']"));
@@ -47,12 +128,10 @@ public class MainTest extends Settings {
 //        searchField.sendKeys(Keys.RETURN);
 //
 //        WebElement searchResults = driver.findElement(By.xpath("//h2[@class='result-title']//span"));
+//        assertEquals(searchResults.getText(), "Результаты поиска", "We did not find you phone");
 //
 //
-//        assertEquals(searchResults.getText(), "Результаты поиска1", "We did not find you phone");
-
-
-        // Thread.sleep(3000);
+//         Thread.sleep(3000);
 
 
     }
