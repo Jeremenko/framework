@@ -1,7 +1,6 @@
 package ua.citrus;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
@@ -13,7 +12,7 @@ import static org.testng.Assert.assertTrue;
 
 public class MainTest extends Settings {
 
-    public static String removeCharAt(String s, int pos){
+    public static String removeCharAt(String s, int pos) {
         return s.substring(0, pos) + s.substring(pos + 1);
 
     }
@@ -50,14 +49,14 @@ public class MainTest extends Settings {
         assertTrue(helloMe.contains("alex test"), "Alex you are not logged to the Citrus");
 
 
-       if (driver.findElement(By.xpath("//button[@class='el-dialog__headerbtn bf-video-btn']")).isDisplayed())
-        driver.findElement(By.xpath("//button[@class='el-dialog__headerbtn bf-video-btn']")).click();
+        if (driver.findElement(By.xpath("//button[@class='el-dialog__headerbtn bf-video-btn']")).isDisplayed())
+            driver.findElement(By.xpath("//button[@class='el-dialog__headerbtn bf-video-btn']")).click();
 
 
         WebElement linkPhones = driver.findElement(By.xpath("//li/a[@title='Смартфоны']"));
 
 
-    //    Thread.sleep(3000);
+        //    Thread.sleep(3000);
 
         Actions phoneType = new Actions(driver);
         phoneType.moveToElement(linkPhones).build().perform();
@@ -71,8 +70,6 @@ public class MainTest extends Settings {
         WebElement xiaomiPhonesPage = driver.findElement(By.xpath("//h1[contains(text(),'Xiaomi')]"));
 
         assertEquals(xiaomiPhonesPage.getText(), "Смартфоны Xiaomi", "You are in different page");
-
-
 
 
 //        WebElement descPrice = driver.findElement(By.xpath("//div[@class='catalog__tool-bar']//li[3]"));
@@ -95,10 +92,7 @@ public class MainTest extends Settings {
 //       closeBasket.click();
 
 
-
-
-
-     // List<WebElement> phones = driver.findElements(By.xpath("//div[@class='product-card__prices']"));
+        // List<WebElement> phones = driver.findElements(By.xpath("//div[@class='product-card__prices']"));
 //        List<WebElement> phones = driver.findElements(By.xpath("//*[@class='product-card__to-basket']"));
 //        System.out.println(phones.size());
 //
@@ -108,52 +102,25 @@ public class MainTest extends Settings {
 
         List<WebElement> phonesPrice = driver.findElements(By.xpath("//div[@class='prices__price']//span[@class='price']"));
         System.out.println(phonesPrice.size());
-//        phonesPrice.get(1).getText();
+
         String string = phonesPrice.get(1).getText();
 
         int indexM = string.indexOf(" ");
         String price_str = removeCharAt(string, indexM);// строка без пробела
         System.out.println(removeCharAt(string, indexM));
         int priceInt = Integer.parseInt(price_str);
-
+//-----------------------
         Thread.sleep(3000);
 
         int maxPrice = 0;
 
         for (int i = 0; i < phonesPrice.size(); i++) {
-            if (maxPrice < phonesPrice.get(i).getText());
+            if (maxPrice < phonesPrice.get(i).getText()) ;
 
             )
             System.out.println(i + "  " + phones.get(i).getText());
         }
-
-
-//        for (int i=0; i<phones.size()-1; i++)
-//        {
-//            System.out.println("Елемент" + "[" + i + "] = "+ "[" + phones.get(i).getText()+ "]");
-//
-//        }
-
-
-
-
-
-
-
-
-
-
-
-//        WebElement searchField = driver.findElement(By.xpath("//input[@id='search-input']"));
-//        searchField.click();
-//        searchField.sendKeys("Xiaomi");
-//        searchField.sendKeys(Keys.RETURN);
-//
-//        WebElement searchResults = driver.findElement(By.xpath("//h2[@class='result-title']//span"));
-//        assertEquals(searchResults.getText(), "Результаты поиска", "We did not find you phone");
-//
-//
-//         Thread.sleep(3000);
+//------------------------------------
 
 
     }
