@@ -13,6 +13,10 @@ import static org.testng.Assert.assertTrue;
 
 public class MainTest extends Settings {
 
+    public static String removeCharAt(String s, int pos){
+        return s.substring(0, pos) + s.substring(pos + 1);
+
+    }
 
     @Test
     public void searchPhones() throws InterruptedException {
@@ -45,14 +49,15 @@ public class MainTest extends Settings {
         String helloMe = driver.findElement(By.xpath("//div[@class='name']")).getText();
         assertTrue(helloMe.contains("alex test"), "Alex you are not logged to the Citrus");
 
-        Thread.sleep(3000);
-        if (driver.findElement(By.xpath("//button[@class='el-dialog__headerbtn bf-video-btn']")).isDisplayed())
-            driver.findElement(By.xpath("//button[@class='el-dialog__headerbtn bf-video-btn']")).click();
+
+       if (driver.findElement(By.xpath("//button[@class='el-dialog__headerbtn bf-video-btn']")).isDisplayed())
+        driver.findElement(By.xpath("//button[@class='el-dialog__headerbtn bf-video-btn']")).click();
 
 
-        Thread.sleep(3000);
         WebElement linkPhones = driver.findElement(By.xpath("//li/a[@title='Смартфоны']"));
-        Thread.sleep(3000);
+
+
+    //    Thread.sleep(3000);
 
         Actions phoneType = new Actions(driver);
         phoneType.moveToElement(linkPhones).build().perform();
@@ -67,21 +72,27 @@ public class MainTest extends Settings {
 
         assertEquals(xiaomiPhonesPage.getText(), "Смартфоны Xiaomi", "You are in different page");
 
-        WebElement descPrice = driver.findElement(By.xpath("//div[@class='catalog__tool-bar']//li[3]"));
-        descPrice.click();
-        Thread.sleep(3000);
-        WebElement clickBasket1 = driver.findElement(By.xpath("//button[@class='product-card__to-basket'][1]"));
+
+
+
+//        WebElement descPrice = driver.findElement(By.xpath("//div[@class='catalog__tool-bar']//li[3]"));
+//        descPrice.click();
+//        Thread.sleep(3000);
+//
+ /*       WebElement clickBasket1 = driver.findElement(By.xpath("(//button[@class='product-card__to-basket'])[1]"));
         clickBasket1.click();
         Thread.sleep(3000);
 
         WebElement closeBasket = driver.findElement(By.xpath("//i[@class='el-dialog__close el-icon el-icon-close']"));
         closeBasket.click();
 
-//        WebElement clickBasket2 = driver.findElement(By.xpath("//button[@class='product-card__to-basket'][2]"));
+        Thread.sleep(3000); */
+
+//        WebElement clickBasket2 = driver.findElement(By.xpath("(//button[@class='product-card__to-basket'])[2]"));
 //        clickBasket2.click();
-
-
- //       closeBasket.click();
+//
+//
+//       closeBasket.click();
 
 
 
@@ -95,15 +106,26 @@ public class MainTest extends Settings {
 //            System.out.println(i + "  " + phones.get(i).getText());
 //        }
 
+        List<WebElement> phonesPrice = driver.findElements(By.xpath("//div[@class='prices__price']//span[@class='price']"));
+        System.out.println(phonesPrice.size());
+//        phonesPrice.get(1).getText();
+        String string = phonesPrice.get(1).getText();
 
-//        List<WebElement> phonesPreOrder = driver.findElements(By.xpath("//button[@class='product-card__to-pre-order']"));
+        int indexM = string.indexOf(" ");
+        String price_str = removeCharAt(string, indexM);// строка без пробела
+        System.out.println(removeCharAt(string, indexM));
+        int priceInt = Integer.parseInt(price_str);
 
-        //div[@class='product-card__overview'][@class!='product-card__to-pre-order']
-        //*[@class='product-card__to-basket']
+        Thread.sleep(3000);
 
-//        for (int i = 0; i < phones.size(); i++) {
-//            System.out.println(i + "  " + phones.get(i).getText());
-//        }
+        int maxPrice = 0;
+
+        for (int i = 0; i < phonesPrice.size(); i++) {
+            if (maxPrice < phonesPrice.get(i).getText());
+
+            )
+            System.out.println(i + "  " + phones.get(i).getText());
+        }
 
 
 //        for (int i=0; i<phones.size()-1; i++)
@@ -112,12 +134,12 @@ public class MainTest extends Settings {
 //
 //        }
 
-//        System.out.println(phones.size());
 
 
 
 
-        Thread.sleep(3000);
+
+
 
 
 
