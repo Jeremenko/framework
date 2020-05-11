@@ -33,9 +33,7 @@ public class MainTest extends Settings {
         emailField.sendKeys("komarik100@ukr.net");
 
         WebElement buttonNext = driver.findElement(By.xpath("//button[@class='custom-button custom-button custom-button--primary identity__submit']"));
-
         assertTrue(buttonNext.isEnabled(), "Button Далее is not enabled");
-
         buttonNext.click();
 
         WebElement passField = driver.findElement(By.xpath("//input[@placeholder='Пароль']"));
@@ -43,25 +41,20 @@ public class MainTest extends Settings {
         passField.sendKeys("25121984");
         WebElement passButton = driver.findElement(By.xpath("//button[@class='custom-button custom-button--primary email-login__submit']"));
         passButton.click();
-        Thread.sleep(10000);
+        Thread.sleep(10000); //вот если тут не ставить ожидание то падает.... как по человечески это сделать ??
 
         String helloMe = driver.findElement(By.xpath("//div[@class='name']")).getText();
         assertTrue(helloMe.contains("alex test"), "Alex you are not logged to the Citrus");
 
-
         if (driver.findElement(By.xpath("//button[@class='el-dialog__headerbtn bf-video-btn']")).isDisplayed())
             driver.findElement(By.xpath("//button[@class='el-dialog__headerbtn bf-video-btn']")).click();
 
-
         WebElement linkPhones = driver.findElement(By.xpath("//li/a[@title='Смартфоны']"));
-
-
-        //    Thread.sleep(3000);
 
         Actions phoneType = new Actions(driver);
         phoneType.moveToElement(linkPhones).build().perform();
 
-// Может можно как то написать адекватный Xpath
+// Может можно как то написать адекватный Xpath ????
 // li[@class='menu-aim__item menu-aim__item--active']//div[@class='wrap']//div[1]//ul[1]//li[5]//a[1]//span[1]
 
         WebElement xiaomiPhones = driver.findElement(By.xpath(
@@ -71,57 +64,21 @@ public class MainTest extends Settings {
 
         assertEquals(xiaomiPhonesPage.getText(), "Смартфоны Xiaomi", "You are in different page");
 
-
-//        WebElement descPrice = driver.findElement(By.xpath("//div[@class='catalog__tool-bar']//li[3]"));
-//        descPrice.click();
-//        Thread.sleep(3000);
-//
- /*       WebElement clickBasket1 = driver.findElement(By.xpath("(//button[@class='product-card__to-basket'])[1]"));
-        clickBasket1.click();
-        Thread.sleep(3000);
-
-        WebElement closeBasket = driver.findElement(By.xpath("//i[@class='el-dialog__close el-icon el-icon-close']"));
-        closeBasket.click();
-
-        Thread.sleep(3000); */
-
-//        WebElement clickBasket2 = driver.findElement(By.xpath("(//button[@class='product-card__to-basket'])[2]"));
-//        clickBasket2.click();
-//
-//
-//       closeBasket.click();
-
-
-        // List<WebElement> phones = driver.findElements(By.xpath("//div[@class='product-card__prices']"));
-//        List<WebElement> phones = driver.findElements(By.xpath("//*[@class='product-card__to-basket']"));
-//        System.out.println(phones.size());
-//
-//        for (int i = 0; i < phones.size(); i++) {
-//            System.out.println(i + "  " + phones.get(i).getText());
-//        }
-
         List<WebElement> phonesPrice = driver.findElements(By.xpath("//div[@class='prices__price']//span[@class='price']"));
-        System.out.println(phonesPrice.size());
+        //  System.out.println(phonesPrice.size());
+        for (WebElement elements : phonesPrice) {
+            String string = elements.getText();
+            int indexM = string.indexOf(" ");
+            String price_str = removeCharAt(string, indexM);// строка без пробела
+            int priceInt = Integer.parseInt(price_str);
+            System.out.println(priceInt);
 
-        String string = phonesPrice.get(1).getText();
-
-        int indexM = string.indexOf(" ");
-        String price_str = removeCharAt(string, indexM);// строка без пробела
-        System.out.println(removeCharAt(string, indexM));
-        int priceInt = Integer.parseInt(price_str);
-//-----------------------
-        Thread.sleep(3000);
-
-        int maxPrice = 0;
-
-        for (int i = 0; i < phonesPrice.size(); i++) {
-            if (maxPrice < phonesPrice.get(i).getText()) ;
-
-            )
-            System.out.println(i + "  " + phones.get(i).getText());
         }
-//------------------------------------
-
+//        int maxPrice = 0;
+//        for (int i = 0; i < phonesPrice.size(); i++) { // Как сделать работающий if для этого for
+//            if (maxPrice < phonesPrice.get(i).getText()) ; //ищем большую цену, и записываем ее в переменную maxPrice
+//            System.out.println(i + "  " + phonesPrice.get(i).getText());
+//        }
 
     }
 
