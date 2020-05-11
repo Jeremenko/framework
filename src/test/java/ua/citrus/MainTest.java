@@ -70,7 +70,7 @@ public class MainTest extends Settings {
             String string = elements.getText();
             int indexM = string.indexOf(" ");
             String price_str = removeCharAt(string, indexM);// строка без пробела
-            int priceInt = Integer.parseInt(price_str);
+            int priceInt = Integer.parseInt(price_str); //выводит список прайсов как цыфры и без пробелов готов к сравнению
             System.out.println(priceInt);
 
         }
@@ -79,6 +79,8 @@ public class MainTest extends Settings {
 //            if (maxPrice < phonesPrice.get(i).getText()) ; //ищем большую цену, и записываем ее в переменную maxPrice
 //            System.out.println(i + "  " + phonesPrice.get(i).getText());
 //        }
+
+        //после нахождения найбольшего прайса что делать дальше как его добавить в корзину
 
     }
 
