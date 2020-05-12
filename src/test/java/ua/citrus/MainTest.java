@@ -74,6 +74,7 @@ public class MainTest extends Settings {
 
             if (maxPrice < priceInt )
                 maxPrice = priceInt;
+
             System.out.println(maxPrice);
         }
 //
