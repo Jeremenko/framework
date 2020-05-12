@@ -66,15 +66,17 @@ public class MainTest extends Settings {
 
         List<WebElement> phonesPrice = driver.findElements(By.xpath("//div[@class='prices__price']//span[@class='price']"));
         //  System.out.println(phonesPrice.size());
+        int maxPrice = 0;
         for (WebElement elements : phonesPrice) {
-            String string = elements.getText();
-            int indexM = string.indexOf(" ");
-            String price_str = removeCharAt(string, indexM);// строка без пробела
-            int priceInt = Integer.parseInt(price_str); //выводит список прайсов как цыфры и без пробелов готов к сравнению
+            String string = elements.getText().replace(" ", "");
+            int priceInt = Integer.parseInt(string); //выводит список прайсов как цыфры и без пробелов готов к сравнению
             System.out.println(priceInt);
 
+            if (maxPrice < priceInt )
+                maxPrice = priceInt;
+            System.out.println(maxPrice);
         }
-//        int maxPrice = 0;
+//
 //        for (int i = 0; i < phonesPrice.size(); i++) { // Как сделать работающий if для этого for
 //            if (maxPrice < phonesPrice.get(i).getText()) ; //ищем большую цену, и записываем ее в переменную maxPrice
 //            System.out.println(i + "  " + phonesPrice.get(i).getText());
