@@ -46,8 +46,9 @@ public class MainTest extends Settings {
         String helloMe = driver.findElement(By.xpath("//div[@class='name']")).getText();
         assertTrue(helloMe.contains("alex test"), "Alex you are not logged to the Citrus");
 
-        if (driver.findElement(By.xpath("//button[@class='el-dialog__headerbtn bf-video-btn']")).isDisplayed())
-            driver.findElement(By.xpath("//button[@class='el-dialog__headerbtn bf-video-btn']")).click();
+        List<WebElement> elementBaner = driver.findElements(By.xpath("//button[@class='el-dialog__headerbtn bf-video-btn']"));
+        if (!elementBaner.isEmpty())
+            elementBaner.get(0).click();
 
         WebElement linkPhones = driver.findElement(By.xpath("//li/a[@title='Смартфоны']"));
 
@@ -66,18 +67,24 @@ public class MainTest extends Settings {
 
         List<WebElement> phonesPrice = driver.findElements(By.xpath("//div[@class='prices__price']//span[@class='price']"));
         //  System.out.println(phonesPrice.size());
+        WebElement phoneWithMaxPrice = null;
         int maxPrice = 0;
-        for (WebElement elements : phonesPrice) {
-            String string = elements.getText().replace(" ", "");
+        for (WebElement phonePrice : phonesPrice) {
+            String string = phonePrice.getText().replace(" ", "");
+
             int priceInt = Integer.parseInt(string); //выводит список прайсов как цыфры и без пробелов готов к сравнению
-            System.out.println(priceInt);
-
-            if (maxPrice < priceInt )
+            //System.out.println(priceInt);
+            if (maxPrice < priceInt ) {
                 maxPrice = priceInt;
+                phoneWithMaxPrice = phonePrice;
+            }
 
-            System.out.println(maxPrice);
         }
-//
+        System.out.println(maxPrice);
+
+//        String xPath = "//div[@class='product-card__overview']/div[.//span[@class='price' and text()='4 999']]//div[@class='product-card__name']";
+//        WebElement phoneOverview = driver.findElement(By.xpath(String.format(xPath, maxPrice)));
+
 //        for (int i = 0; i < phonesPrice.size(); i++) { // Как сделать работающий if для этого for
 //            if (maxPrice < phonesPrice.get(i).getText()) ; //ищем большую цену, и записываем ее в переменную maxPrice
 //            System.out.println(i + "  " + phonesPrice.get(i).getText());
