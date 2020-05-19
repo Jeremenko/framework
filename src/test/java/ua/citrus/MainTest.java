@@ -86,7 +86,7 @@ public class MainTest extends Settings {
         Thread.sleep(20000); // не бейте ногами хотел увидеть попал в корзинку тел или нет
 
 //---------------------------------------------------------------------
-//--------------------------------------------------------------------
+/*//--------------------------------------------------------------------
         List<WebElement> phonesPrices = driver.findElements(By.xpath("//div[@class='product-card__overview'][.//div[@class='product-card__footer']//button[@class='product-card__to-basket']]//div[@class='prices__price']//span[@class='price']"));
 
         for (WebElement phonePrice : phonesPrices) {
@@ -101,9 +101,7 @@ public class MainTest extends Settings {
         System.out.println(maxPrice);
 //---------------------------------------------------------------------
 
-//        WebElement basket = phoneWithMaxPrice.findElement(By.xpath("//div[@class='product-card__overview']//button[@class='product-card__to-basket']"));
-//        Thread.sleep(10000);
-//        basket.click();
+*/
 
 
     }
