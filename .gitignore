@@ -1,4 +1,7 @@
-# Project exclude paths
+
 /target/
 .idea/*
-framework.iml
+target/*
+.git/config
+*.iml
+config.properties

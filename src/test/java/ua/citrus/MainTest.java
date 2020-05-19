@@ -55,9 +55,6 @@ public class MainTest extends Settings {
         Actions phoneType = new Actions(driver);
         phoneType.moveToElement(linkPhones).build().perform();
 
-// Может можно как то написать адекватный Xpath ????
-// li[@class='menu-aim__item menu-aim__item--active']//div[@class='wrap']//div[1]//ul[1]//li[5]//a[1]//span[1]
-
         WebElement xiaomiPhones = driver.findElement(By.xpath(
                 "//li[@class='menu-aim__item menu-aim__item--active']//div[@class='wrap']//div[1]//ul[1]//li[5]//a[1]//span[1]"));
         xiaomiPhones.click();
@@ -65,35 +62,30 @@ public class MainTest extends Settings {
 
         assertEquals(xiaomiPhonesPage.getText(), "Смартфоны Xiaomi", "You are in different page");
 
-        List<WebElement> phonesPrice = driver.findElements(By.xpath("//div[@class='prices__price']//span[@class='price']"));
-        //  System.out.println(phonesPrice.size());
+
+        List<WebElement> phonesPrices = driver.findElements(By.xpath("//div[@class='product-card__overview'][.//div[@class='product-card__footer']//button[@class='product-card__to-basket']]//div[@class='prices__price']//span[@class='price']"));
         WebElement phoneWithMaxPrice = null;
         int maxPrice = 0;
-        for (WebElement phonePrice : phonesPrice) {
-            String string = phonePrice.getText().replace(" ", "");
+        for (WebElement phonePrice : phonesPrices) {
+            String deleteSpaceInPrice = phonePrice.getText().replace(" ", "");
 
-            int priceInt = Integer.parseInt(string); //выводит список прайсов как цыфры и без пробелов готов к сравнению
-            //System.out.println(priceInt);
-            if (maxPrice < priceInt ) {
-                maxPrice = priceInt;
+            int pricePhoneInt = Integer.parseInt(deleteSpaceInPrice); //выводит список прайсов как цыфры и без пробелов готов к сравнению
+
+            if (maxPrice < pricePhoneInt) {
+                maxPrice = pricePhoneInt;
                 phoneWithMaxPrice = phonePrice;
             }
-
         }
         System.out.println(maxPrice);
 
-//        String xPath = "//div[@class='product-card__overview']/div[.//span[@class='price' and text()='4 999']]//div[@class='product-card__name']";
-//        WebElement phoneOverview = driver.findElement(By.xpath(String.format(xPath, maxPrice)));
 
-//        for (int i = 0; i < phonesPrice.size(); i++) { // Как сделать работающий if для этого for
-//            if (maxPrice < phonesPrice.get(i).getText()) ; //ищем большую цену, и записываем ее в переменную maxPrice
-//            System.out.println(i + "  " + phonesPrice.get(i).getText());
-//        }
 
-        //после нахождения найбольшего прайса что делать дальше как его добавить в корзину
+//        WebElement basket = phoneWithMaxPrice.findElement(By.xpath("//div[@class='product-card__overview']//button[@class='product-card__to-basket']"));
+//        Thread.sleep(10000);
+//        basket.click();
+
 
     }
-
 
 }
 
