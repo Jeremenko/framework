@@ -5,7 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -16,6 +18,7 @@ public class MainTest extends Settings {
         return s.substring(0, pos) + s.substring(pos + 1);
 
     }
+
 
     @Test
     public void searchPhones() throws InterruptedException {
@@ -55,8 +58,7 @@ public class MainTest extends Settings {
         Actions phoneType = new Actions(driver);
         phoneType.moveToElement(linkPhones).build().perform();
 
-        WebElement xiaomiPhones = driver.findElement(By.xpath(
-                "//li[@class='menu-aim__item menu-aim__item--active']//span[text()='Xiaomi']"));
+        WebElement xiaomiPhones = driver.findElement(By.xpath("//li[@class='menu-aim__item menu-aim__item--active']//span[text()='Xiaomi']"));
         xiaomiPhones.click();
 
         WebElement xiaomiPhonesPage = driver.findElement(By.xpath("//h1[contains(text(),'Xiaomi')]"));
@@ -65,23 +67,23 @@ public class MainTest extends Settings {
         WebElement phoneWithMaxPrice = null;
         int maxPrice = 0;
 //----------------------------------------New piece of code----------------------------
-        List<WebElement> allItems = driver.findElements(By.xpath("//div[@class='product-card__body']"));
+        List<WebElement> allItems = driver.findElements(By.xpath("//div[@class='product-card__overview'][.//div[@class='product-card__footer']//button[@class='product-card__to-basket']]"));
         for (WebElement item : allItems) {
-            WebElement phonePrice = item.findElement(By.xpath("[.//div[@class='prices__price']//span[@class='price']"));
+           List <WebElement> phonePrice = item.findElements(By.xpath(".//div[@class='prices__price']//span[@class='price']"));
 
-            String deleteSpaceInPrice = phonePrice.getText().replace(" ", "");
-            int pricePhoneInt = Integer.parseInt(deleteSpaceInPrice); //выводит список прайсов как цыфры и без пробелов готов к сравнению
+            if (!phonePrice.isEmpty()) {
+                String deleteSpaceInPrice = phonePrice.get(0).getText().replace(" ", "");
+                int pricePhoneInt = Integer.parseInt(deleteSpaceInPrice); //выводит список прайсов как цыфры и без пробелов готов к сравнению
 
-            if (maxPrice < pricePhoneInt) {
-                maxPrice = pricePhoneInt;
-                phoneWithMaxPrice = item;
+                if (maxPrice < pricePhoneInt) {
+                    maxPrice = pricePhoneInt;
+                    phoneWithMaxPrice = item;
+                }
             }
         }
         WebElement basket = phoneWithMaxPrice.findElement(By.xpath("//div[@class='product-card__overview']//div[@class='product-card__footer']//button[@class='product-card__to-basket']"));
         basket.click();
         Thread.sleep(20000); // не бейте ногами хотел увидеть попал в корзинку тел или нет
-
-
 
 //---------------------------------------------------------------------
 //--------------------------------------------------------------------
