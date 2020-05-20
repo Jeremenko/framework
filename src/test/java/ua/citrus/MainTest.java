@@ -69,7 +69,7 @@ public class MainTest extends Settings {
 //----------------------------------------New piece of code----------------------------
         List<WebElement> allItems = driver.findElements(By.xpath("//div[@class='product-card__overview'][.//div[@class='product-card__footer']//button[@class='product-card__to-basket']]"));
         for (WebElement item : allItems) {
-           List <WebElement> phonePrice = item.findElements(By.xpath(".//div[@class='prices__price']//span[@class='price']"));
+            List<WebElement> phonePrice = item.findElements(By.xpath(".//div[@class='prices__price']//span[@class='price']"));
 
             if (!phonePrice.isEmpty()) {
                 String deleteSpaceInPrice = phonePrice.get(0).getText().replace(" ", "");
@@ -81,12 +81,12 @@ public class MainTest extends Settings {
                 }
             }
         }
-        WebElement basket = phoneWithMaxPrice.findElement(By.xpath("//div[@class='product-card__overview']//div[@class='product-card__footer']//button[@class='product-card__to-basket']"));
+        WebElement basket = phoneWithMaxPrice.findElement(By.xpath(".//div[@class='product-card__footer']//button[@class='product-card__to-basket']"));
         basket.click();
         Thread.sleep(20000); // не бейте ногами хотел увидеть попал в корзинку тел или нет
 
-//---------------------------------------------------------------------
-/*//--------------------------------------------------------------------
+
+/*--------------------------------------------------------------------
         List<WebElement> phonesPrices = driver.findElements(By.xpath("//div[@class='product-card__overview'][.//div[@class='product-card__footer']//button[@class='product-card__to-basket']]//div[@class='prices__price']//span[@class='price']"));
 
         for (WebElement phonePrice : phonesPrices) {
@@ -99,9 +99,7 @@ public class MainTest extends Settings {
             }
         }
         System.out.println(maxPrice);
-//---------------------------------------------------------------------
-
-*/
+---------------------------------------------------------------------*/
 
 
     }
