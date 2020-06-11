@@ -16,7 +16,7 @@ public abstract class Settings {
 
 
     @BeforeClass
-    public void setUP() {
+    public void setUP() throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         //Create a map to store  preferences
         Map<String, Object> prefs = new HashMap<String, Object>();
