@@ -43,10 +43,5 @@ public abstract class Settings {
         driver.quit();
     }
 
-//    @DataProvider(name = "data")
-//    public Object[][] dataProviderMethod() {
-//        return new Object[][]{{"Xiaomi"}, {"Samsung"}};
-//    }
-
 
 }
