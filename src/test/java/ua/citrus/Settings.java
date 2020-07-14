@@ -1,5 +1,6 @@
 package ua.citrus;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -17,7 +18,8 @@ public abstract class Settings {
 
     @BeforeClass
     public void setUP() throws InterruptedException {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+     //   System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver1.exe");
+        WebDriverManager.chromedriver().setup();
         //Create a map to store  preferences
         Map<String, Object> prefs = new HashMap<String, Object>();
         //add key and value to map as follow to switch off browser notification
@@ -31,7 +33,7 @@ public abstract class Settings {
         driver = new ChromeDriver(options);
 
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
         driver.get("https://www.citrus.ua/");
     }

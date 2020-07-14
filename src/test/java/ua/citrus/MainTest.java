@@ -57,7 +57,7 @@ public class MainTest extends Settings {
         }
         WebElement basket = phoneWithMaxPrice.findElement(By.xpath(".//div[@class='product-card__footer']//button[@class='product-card__to-basket']"));
         basket.click();
-        Thread.sleep(20000); // не бейте ногами хотел увидеть попал в корзинку тел или нет
+        Thread.sleep(20000);
 
     }
 
@@ -84,7 +84,7 @@ public class MainTest extends Settings {
 
         WebElement passButton = driver.findElement(By.xpath("//button[@class='custom-button custom-button--primary email-login__submit']"));
         passButton.click();
-        Thread.sleep(10000); //вот если тут не ставить ожидание то падает.... как по человечески это сделать ??
+        Thread.sleep(10000);
 
         String helloMe = driver.findElement(By.xpath("//div[@class='name']")).getText();
         assertTrue(helloMe.contains("alex test"), "Alex you are not logged to the Citrus");
